@@ -1,0 +1,14 @@
+{
+  "name": "auto-block",
+  "version": "1.0.0",
+  "description": "Component block createtion automotation tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Roman Shamyan",
+  "license": "ISC",
+  "dependencies": {
+    "nunjucks": "^2.3.0"
+  }
+}
