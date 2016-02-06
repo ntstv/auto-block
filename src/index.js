@@ -10,5 +10,7 @@
 
     }
 
+    console.log('Hello world');
+
 
 })();
