@@ -1,18 +1,33 @@
+{% import "class-macros.nj" as classMacros %}
+
+{#
+  Template params:
+  ----------------
+  className: string,
+  superClassName: string,
+  requires: (alias: className)[]
+#}
 {% block provide %}
+    {{ classMacros.provideMacro(className) }}
 {% endblock %}
 
 {% block require %}
-{% endblock}
+    {{ classMacros.requiresMacro(requires) }}
+{% endblock %}
 
-{% block constructor %}
-{% endblock constructor %}
+{% block funcBlock %}
+    {{ classMacros.constructorMacro(className, superClassName) }}
+{% endblock %}
 {% block inherits %}
-{% endblock inherits %}
+    {{ classMacros.inheritsMacro(className, superClassName) }}
+{% endblock %}
 
 goog.scope(function() {
     {% block aliases %}
+        {{ classMacros.aliasesMacro(requires) }}
     {% endblock %}
 
     {% block methods %}
+    //todo
     {% endblock %}
-})
+});

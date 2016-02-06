@@ -1,24 +1,46 @@
 
 {% macro provideMacro(name) %}
-goog.provide('{name}');
+goog.provide('{{ name }}');
 {% endmacro %}
 
 {% macro requireMacro(name) %}
-goog.require('{name}');
+goog.require('{{ name }}');
 {% endmacro %}
 
-{% macro inheritsMacro(className, parentName)}
-goog.inherits({className}, {parentName});
+{% macro inheritsMacro(className, parentName) %}
+goog.inherits({{ className }}, {{ parentName }});
 {% endmacro %}
 
 {% macro aliasesMacro(aliases) %}
-    {% for (alias, name in aliases) %}
+    {% for item in aliases %}
         {% if loop.first %}
-           var {alias} = {name},
+    var {{ item.alias }} = {{ item.className }},
         {% elif loop.last %}
-               {alias} = {name};
+    {{ item.alias }} = {{ item.className }};
         {% else %}
-               {alias} = {name};
+    {{ item.alias }} = {{ item.className }},
         {% endif %}
     {% endfor %}
+{% endmacro %}
+
+{% macro requiresMacro(aliases) %}
+    {% for alias in aliases %}
+        {{ requireMacro(alias.className) }}
+    {% endfor %}
+{% endmacro %}
+
+{% macro constructorMacro(className, superClassName) %}
+{{ constructorComment(className, superClassName) }}
+{{ className }} = function(opt_params) {
+    goog.base(this, opt_params);
+};
+{% endmacro %}
+
+{% macro constructorComment(className, superClassName) %}
+/**
+* {{ className }}
+* @param {Object=} opt_params
+* @constructor
+* @extends {{ '{' + superClassName + '}' }}
+*/
 {% endmacro %}

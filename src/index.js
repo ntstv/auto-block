@@ -1,16 +1,4 @@
-(function() {
-    'use strict';
+import test from './test.js';
 
-    class Main {
-
-        render() {
-
-        }
-
-
-    }
-
-    console.log('Hello world');
-
-
-})();
+console.log('Hello');
+test();
